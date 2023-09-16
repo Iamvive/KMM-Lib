@@ -1,7 +1,17 @@
+import org.gradle.kotlin.dsl.ext
+
 plugins {
     //trick: for the same plugin versions in all sub-modules
-    id("com.android.library").version("7.4.2").apply(false)
-    kotlin("multiplatform").version("1.8.21").apply(false)
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.multiplatform) apply false
+}
+
+ext {
+    set("compileSdkVersion", 33)
+    set("minSdkVersion", 21)
+    set("targetSdkVersion", 33)
+    set("nameSpace", "com.android.kmm_lib")
+    set("jvmTarget", "1.8")
 }
 
 tasks.register("clean", Delete::class) {
