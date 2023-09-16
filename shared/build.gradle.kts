@@ -1,6 +1,6 @@
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
+    alias(libs.plugins.multiplatform)
+    alias(libs.plugins.android.library)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -10,7 +10,7 @@ kotlin {
     android {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = rootProject.ext["jvmTarget"] as String
             }
         }
     }
@@ -40,9 +40,9 @@ kotlin {
 }
 
 android {
-    namespace = "com.android.kmm_lib"
-    compileSdk = 33
+    namespace = rootProject.ext["nameSpace"] as String
+    compileSdk = rootProject.ext["compileSdkVersion"] as Int
     defaultConfig {
-        minSdk = 24
+        minSdk = rootProject.ext["minSdkVersion"] as Int
     }
 }
